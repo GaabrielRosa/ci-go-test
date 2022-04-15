@@ -1,36 +1,12 @@
 name: ci-golang-workflow
-  # aqui pode setar o nome que quiser
 on: [push]
-  # toda vez que der um push para esse repositório, esse processo de CI vai rodar
 jobs:
-  # aqui vamos ter os jobs que queremos trabalhar
   check-application:
-    # aqui damos um nome pro nosso job, nesse caso chamamos de check-application
     runs-on: ubuntu-latest
-      # aqui estamos falando aonde queremos rodar essa aplicação, que no caso
-      # aqui está definido que será numa máquina ubuntu na sua útlima versão
     steps:
-      # aqui vamos definir quais os passos que queremos executar na hora em 
-      # que esse processo começar a ser executado
       - uses: actions/checkout@v2
-        # essa action pega os dados que acabaram de subir e vai baixar nessa 
-        # máquina ubuntu. Então ele faz o git checkout pra gente, ele baixa 
-        # esses arquivos 
-        # pra gente, sem isso a gente não consegue fazer nada.
-        # actions/checkout@v2: actions é um nome de um usuário, checkout é o 
-        # repositório, no caso a action que estamos trabalhando, é possível 
-        # visualizar pelo GitHub no link https://github.com/actions/checkout
       - uses: actions/setup-go@v2
-        # essa action vai preparar um setup/ambiente go pra gente trabalhar
-        # actions/setup-go@v2: actions é um nome de um usuário, setup-go é o 
-        # repositório, no caso a action que estamos trabalhando, é possível 
-        # visualizar pelo GitHub no link https://github.com/actions/setup-go
         with:
-          # como definimos um setup go, agora vamos definir qual a versão que
-          # queremos utilizar, esse go-version: 1.15 abaixo é um parâmetro que
-          # estamos passando para nossa action
           go-version: 1.15
         - run: go test
-          # aqui vamos rodar o comando go test
         - run: go run math.go
-          # aqui vamos fazer ele rodar a nossa aplicação
